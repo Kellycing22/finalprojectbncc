@@ -1,0 +1,50 @@
+.filter-container {
+    padding: 20px;
+}
+
+.filter-controls {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.filter-label {
+    font-weight: bold;
+}
+
+.filter-select {
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.filter-button {
+    padding: 10px 20px;
+    margin-left: 20px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.country-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.country-card {
+    padding: 10px;
+    border: 1px solid #043258;
+    border-radius: 5px;
+    background-color: #9dceff;
+}
+
+.country-name {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.country-detail {
+    margin-bottom: 5px;
+}
