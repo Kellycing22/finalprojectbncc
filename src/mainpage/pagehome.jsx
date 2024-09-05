@@ -2,24 +2,28 @@ export default function PageHome() {
     const popularCountries = [
         {
             name: "United States",
-            flag: "🇺🇸",
+            flag: "https://flagcdn.com/w320/us.png",
         },
         {
             name: "Canada",
-            flag: "🇨🇦",
+            flag: "https://flagcdn.com/w320/ca.png",
         },
         {
             name: "United Kingdom",
-            flag: "🇬🇧",
+            flag: "https://flagcdn.com/w320/gb.png",
         },
         {
             name: "Australia",
-            flag: "🇦🇺",
+            flag: "https://flagcdn.com/w320/gs.png",
         },
         {
             name: "Germany",
-            flag: "🇩🇪",
+            flag: "https://flagcdn.com/w320/de.png",
         },
+        {
+            name: "China",
+            flag: "https://flagcdn.com/w320/cn.png",
+        }
     ];
 
     return (
@@ -45,7 +49,7 @@ export default function PageHome() {
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                     {popularCountries.map((country, index) => (
                         <div key={index} className="bg-white p-4 rounded shadow hover:shadow-lg transition duration-300">
-                            <p className="text-3xl">{country.flag}</p>
+                            <img src={country.flag} alt={`Flag of ${country.name}`} className="w-full h-auto" />
                             <h3 className="text-xl mt-2 font-medium">{country.name}</h3>
                         </div>
                     ))}

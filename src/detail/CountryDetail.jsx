@@ -1,52 +1,48 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function CountryDetail() {
-    const { name } = useParams();  // Extract the country name from the URL
-    const [data, setData] = useState(null);  // State to hold country data
-    const [loading, setLoading] = useState(false);  // State to manage loading status
-
-    async function ambilData() {
-        setLoading(true);  // Set loading to true when data fetching starts
-        try {
-            const response = await axios.get(`https://restcountries.com/v3.1/name/${name}`);
-            setData(response.data[0]);  // Set the first country from the response data
-        } catch (error) {
-            console.error(error);
-        } finally {
-            setLoading(false);  // Set loading to false when data fetching ends
-        }
-    }
+    const { name } = useParams();  
+    const [data, setData] = useState(null);  
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        ambilData();  // Fetch data when component mounts or when `name` changes
+        setLoading(true);
+        axios.get(`https://restcountries.com/v3.1/name/${name}`)
+            .then(function (response) {
+                setData(response.data[0]); 
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+            .finally(function () {
+                setLoading(false);
+            });
     }, [name]);
 
     if (loading) {
-        return <div>Loading...</div>;  // Show loading state while data is being fetched
+        return <div>Loading...</div>;
     }
 
     if (!data) {
-        return <div>No data found.</div>;  // Show this if no data is found
+        return <div>No data found.</div>;
     }
 
-    // Render the country details
     return (
-        <div className="country-detail p-4 bg-blue-100 rounded-lg shadow-lg">
-            <h1 className="text-4xl font-bold mb-4">{data.name.common}</h1>
-            <img src={data.flags.png} alt={`Flag of ${data.name.common}`} className="w-48 h-auto mb-4" />
-            <ul className="text-lg">
-                <li><strong>Capital:</strong> {data.capital ? data.capital[0] : "N/A"}</li>
-                <li><strong>Population:</strong> {data.population.toLocaleString()}</li>
-                <li><strong>Area:</strong> {data.area.toLocaleString()} km²</li>
-                <li><strong>Region:</strong> {data.region}</li>
-                <li><strong>Currency:</strong> {data.currencies ? Object.values(data.currencies)[0].name : "N/A"}</li>
-                <li><strong>Language(s):</strong> {data.languages ? Object.values(data.languages).join(", ") : "N/A"}</li>
-            </ul>
+        <div>
+            <h1>{data.name.common}</h1>
+            <img src={data.flags.png} alt={`Flag of ${data.name.common}`} width="200" />
+            <p>Capital: {data.capital ? data.capital[0] : "N/A"}</p>
+            <p>Population: {data.population?.toLocaleString()}</p>
+            <p>Area: {data.area?.toLocaleString()} km²</p>
+            <p>Region: {data.region}</p>
+            <p>Currency: {data.currencies ? Object.values(data.currencies)[0].name : "N/A"}</p>
+            <p>Language(s): {data.languages ? Object.values(data.languages).join(", ") : "N/A"}</p>
         </div>
     );
 }
+
 
 
 

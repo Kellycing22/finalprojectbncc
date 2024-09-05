@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import './CountryFilter.css'; // Assuming you have a CSS file for custom styling
+import './CountryFilter.css'; 
 
 export default function CountryFilter() {
     const [data, setData] = useState([]);
